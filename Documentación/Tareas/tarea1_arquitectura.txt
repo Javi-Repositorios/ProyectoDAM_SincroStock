@@ -13,3 +13,19 @@ Configurar el encriptador de contraseñas.
 
 Configurar el archivo gitignore
 Añadir descripciones de clases
+
+Configurar jwutils, securityconfig y password encoder.
+
+Pruebas de caja negra aislamiento de red. Imagen
+Realizado Commit en branch rama1
+///////////////////
+
+
+
+
+Estructura archivos html en cliente.
+Correcion jwutils a componente bean no estatico
+Correcion configuracion seguridad
+Servicio Login
+Servicio Trabajadores
+Validacion Rol js en cliente.
