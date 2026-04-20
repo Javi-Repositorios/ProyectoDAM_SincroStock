@@ -1,0 +1,39 @@
+	
+	
+	////// TAREA #6 ORQUESTACION
+	
+	Crear estructura de carpetas de proyecto.
+	Configuro y descargo SpringBoot y lo añado al repositorio.
+	Configuro la arquitectura de contenedores mediante docker-compose.yml
+	
+	Crear la estructura de la base de datos.
+	Introducir datos iniciales: 1 usuario admin,1 usuario vendedor, 1 cliente,  1 producto, 1 pedido.
+	
+	Configurar application properties.
+	Configurar las dependencias del proyecto (Security, JPA, JWT, Postgres)en el archivo pom.xml
+	Configurar Spring Security: utilidad para tokens y el filtro 
+	Configurar el encriptador de contraseñas.
+	
+	Configurar el archivo gitignore
+	Añadir descripciones de clases
+	
+	Configurar jwutils, securityconfig y password encoder.
+	
+	Pruebas de caja negra aislamiento de red. Imagen
+	Realizado Commit en branch rama1
+	
+	
+	////// TAREA #1 LOGIN
+	
+	Estructura archivos html en cliente.
+	Correcion jwutils a componente bean no estatico
+	Correcion configuracion seguridad
+	Servicio Login
+	Servicio Trabajadores
+	Validacion Rol js en cliente.
+	
+	////// TAREA #8 PRUEBAS 1
+	Instalo POSTMAN
+	Creo las pruebas con el formato( body) requerido y el resultado esperado
+	Obtengo los resultados y creo el informe.
+	Se adjunta plan de pruebas y resultado s de las pruebas de Login
