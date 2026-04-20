@@ -1,0 +1,15 @@
+$kind: http-request
+name: Camino 1. Exito
+description: Camino 1. Éxito
+url: localhost/api/trabajadores/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"javierms\",\r
+
+    \    \"password\": \"12345678\"\r
+
+    }"
+order: 3000

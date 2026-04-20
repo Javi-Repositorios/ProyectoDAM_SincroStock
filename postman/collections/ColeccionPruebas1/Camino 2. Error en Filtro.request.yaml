@@ -1,0 +1,25 @@
+$kind: http-request
+name: Camino 2. Error en Filtro
+description: Camino 1. Éxito
+url: localhost/api/trabajadores/login
+method: POST
+headers:
+  User-Agent: trojano
+  Origin: http://malwre.e
+  Content-Lengh: "0"
+  Content-Type: application/json
+  Accept: application/xml
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"javierms\",\r
+
+    \    \"password\": \"12345678\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: pm.response.to.have.status(406);
+    language: text/javascript
+order: 2583

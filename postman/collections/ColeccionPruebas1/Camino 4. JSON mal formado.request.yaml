@@ -1,0 +1,19 @@
+$kind: http-request
+name: Camino 4. JSON mal formado
+description: Camino 1. Éxito
+url: localhost/api/trabajadores/login
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"javierms\",\r
+
+    \    \"password\": \r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: pm.response.to.have.status(400);
+    language: text/javascript
+order: 3762706290087448
