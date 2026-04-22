@@ -2,26 +2,29 @@
 <html>
 <head>
     <title>Panel de Control - Director</title>
-    <script src="../js/validaRolDirector.js"></script>
+    <meta charset="UTF-8">
+   
+    <link rel="stylesheet" href="/css/estilo_base.css">
 </head>
+
+
 <body>
+    <div class="container">
+        <h2>Bienvenido.<br>Elija su área de trabajo:</h2>
 
-    <h2>Bienvenido, Director. Elija su área de trabajo:</h2>
+        <button onclick="window.location.href='PanelesTrabajo/Direccion.html'">
+            GESTIÓN DE EMPRESA (Director)
+        </button>
 
-    <button onclick="window.location.href='Direccion.html'">
-        GESTIÓN DE EMPRESA (Director)
-    </button>
+        <button onclick="window.location.href='PanelesTrabajo/Ventas.html'">
+            PANEL DE VENTAS (Vendedor)
+        </button>
 
-    <br><br>
-
-    <button onclick="window.location.href='Ventas.html'">
-        PANEL DE VENTAS (Vendedor)
-    </button>
-
-    <br><hr>
-    <a href="../index.html" onclick="localStorage.clear()">Cerrar Sesión</a>
-
+        <hr>
+        
+        <a href="../index.html" onclick="localStorage.clear()">Cerrar Sesión</a>
+    </div>
     
-
+     <script src="../js/validaRolDirector.js"></script>
 </body>
 </html>

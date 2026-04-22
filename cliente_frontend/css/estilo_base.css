@@ -1,0 +1,61 @@
+body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: #f4f7f6; 
+    margin: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    color: #2c3e50;
+}
+
+/* Contenedor principal (estilo .card del original) */
+.container {
+    background: white; 
+    padding: 40px; 
+    border-radius: 12px; 
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1); 
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+}
+
+h2 {
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Botonera */
+button { 
+    width: 100%;
+    padding: 20px; 
+    margin: 10px 0;
+    border: none; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 1rem;
+    font-weight: bold; 
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    display: block;
+}
+
+
+
+
+
+a { 
+    display: inline-block;
+    color: #e74c3c; 
+    text-decoration: none; 
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+a:hover {
+    color: #c0392b;
+    border-bottom: 1px solid #c0392b;
+}

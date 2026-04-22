@@ -171,7 +171,7 @@ function resetForm() {
 // 8. LOGOUT
 function logout() {
     localStorage.clear();
-    location.href = '../index.html';
+    location.href = '/index.html';
 }
 
 // 9. INICIO
