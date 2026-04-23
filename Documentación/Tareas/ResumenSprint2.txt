@@ -3,7 +3,7 @@
 
 /// TAREA CRUD ARTICULOS
 
-// Se crea el modelo controlador, servicio y repositorio de articulos.
+// Se crea el modelo, controlador, servicio y repositorio de Articulos.
 		* se crea su vez el modelo y  servicio de lineas_de_pedido por ser requerido por Spring al estar relacionado en tablas.
 
 // Se crea el servicio de validación.
@@ -12,5 +12,17 @@
 
 // Restructuracion y reparacion de rutas y funcionamiento general de interfaz.
  	( Se necesito una página extra para gestionar la ambivalencia de roles ) --> SeleccionPerfil.html
+
+
+
+
+/// TAREA CRUD CLIENTES
+
+// Se crea el modelo, controlador, servicio y repositorio de Clientes.
+
+// Se añaden los archivos html, js, css al servidor NGINX cliente.
+
+// Servicio de validacion para editar o crear Clientes en front y back end.
+
 
 
