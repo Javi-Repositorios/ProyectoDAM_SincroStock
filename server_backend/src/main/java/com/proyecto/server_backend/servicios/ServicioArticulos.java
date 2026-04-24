@@ -37,8 +37,8 @@ public class ServicioArticulos {
     //GUARDAR
     public Articulo guardar(Articulo articulo) 
     {
-        // 1. Si el validador dice que hay errores, lanzamos una excepción propia
-        if (servicioValidacion.esArticuloValido(articulo)) 
+        // Si no da valido
+        if (!servicioValidacion.esArticuloValido(articulo)) 
         {
             throw new IllegalArgumentException("DATOS_INVALIDOS");
         }

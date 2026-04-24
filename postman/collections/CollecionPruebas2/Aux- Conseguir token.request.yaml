@@ -1,0 +1,14 @@
+$kind: http-request
+name: "Aux: Conseguir token"
+url: ""
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \    \"username\": \"javierms\",\r
+
+    \    \"password\": \"12345678\"\r
+
+    }"
+order: 7000

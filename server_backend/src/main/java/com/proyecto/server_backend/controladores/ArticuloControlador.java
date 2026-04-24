@@ -1,6 +1,7 @@
 package com.proyecto.server_backend.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,7 @@ public class ArticuloControlador {
 	
 	@Autowired private ServicioArticulos servicioArticulos;
 
+
 	
 	//LISTAR
 	@GetMapping
@@ -31,29 +33,29 @@ public class ArticuloControlador {
 		return ResponseEntity.ok(servicioArticulos.listarTodos());
 	}
 	
-	//NUEVO	
 	@PostMapping
 	public ResponseEntity<?> crearArticulo(@RequestBody Articulo articulo) {
-		
-		
 	    ResponseEntity<?> respuesta;
 
-	    try
-	    {
+	    try {
+	        // El servicio hace el trabajo y valida (Nodos 2, 5 y 7)
 	        Articulo guardado = servicioArticulos.guardar(articulo);
-	        respuesta = ResponseEntity.status(201).body(guardado);	        
-	    }
-	    catch (IllegalArgumentException e)
-	    {
-	        respuesta = ResponseEntity.status(422).body("Error: Precio o stock negativos.");	        
-	    }
-	    catch (Exception e) 
-	    {
-	        // Para cualquier otro error inesperado (500)
+	        respuesta = ResponseEntity.status(201).body(guardado);
+	    } 
+	    catch (IllegalArgumentException e) {
+	        // Capturamos el error de lógica del servicio (Nodo 4)
+	        respuesta = ResponseEntity.status(422).body("Error: Precio o stock negativos.");
+	    } 
+	    catch (DataIntegrityViolationException e) {
+	        // Error de BD, por ejemplo si ya existe (Nodo 6)
+	        respuesta = ResponseEntity.status(409).body("El artículo ya existe.");
+	    } 
+	    catch (Exception e) {
+	        // Cualquier otro drama (500)
 	        respuesta = ResponseEntity.status(500).body("Error interno.");
 	    }
 
-	    return respuesta;
+	    return respuesta; // ÚNICO RETURN. Prometido.
 	}
 	
 	//BORRAR POR ID 

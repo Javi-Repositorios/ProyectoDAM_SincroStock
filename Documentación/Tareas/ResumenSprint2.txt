@@ -26,3 +26,14 @@
 
 
 
+///PRUEBAS
+
+Se añade la documentacion perteneceiente a las pruebas.
+
+Corregido lógica de validacion incoherente en el servicio de  validación  de articulos.
+ ( Error: Permitia 1 de los valores negativos, ahora no permite inguno) 
+
+
+Corregida lógica incoherente en la validacion de clientes.
+ ( Error: No se tuvo en cuenta que Spring actualiza el registro si detecta un id existente, en vez de dar error de duplicado)
+   Solucion: Se comprueba si el id existe dentro de la validacion para lanzar el error)

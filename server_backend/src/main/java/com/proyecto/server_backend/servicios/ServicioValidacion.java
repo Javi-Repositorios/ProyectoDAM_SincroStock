@@ -12,7 +12,7 @@ public class ServicioValidacion {
 	{
 		boolean esValido = false;
 		
-		if (articulo.getPrecio() > 0 || articulo.getStock_disponible() > 0) {
+		if (articulo.getPrecio() > 0 && articulo.getStock_disponible() > 0) {
 			
 			esValido = true;
         }

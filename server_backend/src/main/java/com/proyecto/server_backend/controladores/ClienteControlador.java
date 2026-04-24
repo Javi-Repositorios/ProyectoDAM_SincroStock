@@ -42,7 +42,7 @@ public class ClienteControlador {
 		try
 		{
 			Cliente guardado = servicioClientes.guardar(cliente);
-			respuesta = ResponseEntity.status(210).body(guardado);
+			respuesta = ResponseEntity.status(201).body(guardado);
 		} 
 		catch (IllegalArgumentException e) 
 		{
