@@ -1,0 +1,26 @@
+$kind: http-request
+name: "Camino3: Error Duplicado"
+url: localhost/api/clientes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nif\": \"11111111X\",\r
+
+    \    \"nombre\": \"USB\",\r
+
+    \    \"email\": \"email@email.com\",\r
+
+    \    \"telefono\": \"56565656\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Nodo 6: Detección de duplicado correcta\", function () {\r
+
+      \    pm.response.to.have.status(409);\r
+
+      });"
+    language: text/javascript
+order: 2003

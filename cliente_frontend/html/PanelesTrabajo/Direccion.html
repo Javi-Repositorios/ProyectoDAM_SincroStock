@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <title>Panel de Control - Director</title>
+    <script src="js/validaRolDirector.js"></script>
+    <link rel="stylesheet" href="/css/admin_articulos.css">
+</head>
+<body>
+
+<nav>
+    <h2>Direccion - Sincrostock</h2>
+    <hr>
+    <ul style="list-style: none; padding: 0;">
+        <li onclick="location.href='Direccion.html'" style="cursor:pointer; padding: 10px;"> Inicio</li>
+        <li onclick="location.href='Admin_Trabajadores.html'" style="cursor:pointer; padding: 10px;">Trabajadores</li>
+        <li onclick="location.href='Admin_Articulos.html'" style="cursor:pointer; padding: 10px;">Productos</li>
+        <li onclick="location.href='Admin_Clientes.html'" style="cursor:pointer; padding: 10px; background: #34495e;">Clientes</li>
+       
+    </ul>
+    <button class="btn btn-logout" onclick="logout()">Cerrar Sesión</button>
+</nav>
+
+
+
+<main>
+    <div class="card">
+        <h1>Veras los pedidos de todos los vendedores aqui</h1>
+
+        <form id="form-todoslospedidos" class="form-group">
+           
+        </form>
+
+        <table>
+            
+        </table>
+    </div>
+</main>
+</body>
+</html>

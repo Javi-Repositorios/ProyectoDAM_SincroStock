@@ -1,0 +1,28 @@
+$kind: http-request
+name: "Camino2: Error en Negocio"
+url: localhost/api/clientes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nif\": \"11111X\",\r
+
+    \    \"nombre\": \"USB\",\r
+
+    \    \"email\": \"email@email.com\",\r
+
+    \    \"telefono\": \"56565656\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Nodo 4: Error de validación detectado\", function () {\r
+
+      \    pm.response.to.have.status(422);\r
+
+      \r
+
+      });"
+    language: text/javascript
+order: 1863

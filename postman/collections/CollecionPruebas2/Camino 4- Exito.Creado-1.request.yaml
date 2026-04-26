@@ -1,0 +1,32 @@
+$kind: http-request
+name: "Camino 4: Exito.Creado"
+url: localhost/api/clientes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nif\": \"11662121X\",\r
+
+    \    \"nombre\": \"Cliente no duplicado\",\r
+
+    \    \"email\": \"email7848@email.com\",\r
+
+    \    \"telefono\": \"56565656\"\r
+
+    }"
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Nodo 7: Cliente creado con éxito\", function () {\r
+
+      \    // Verifica que el estado sea 201\r
+
+      \    pm.response.to.have.status(201);\r
+
+      \    \r
+
+      \r
+
+      });"
+    language: text/javascript
+order: 3000
