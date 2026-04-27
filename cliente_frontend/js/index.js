@@ -50,9 +50,9 @@ document.getElementById('btn-login').addEventListener('click', async (e) => {
 				{
 			        window.location.href = 'html/Direccion.html';
 			    } 
-				else if (listaRoles.includes('VENTAS')) 
+				else if (listaRoles.includes('VENDEDOR')) 
 				{
-			        window.location.href = 'html/Ventas.html';
+			        window.location.href = 'html/PanelesTrabajo/Ventas.html';
 			    }
 			}
 			else 

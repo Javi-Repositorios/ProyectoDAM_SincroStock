@@ -1,6 +1,8 @@
 package com.proyecto.server_backend.modelos;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 
 
 @Entity
@@ -25,17 +28,17 @@ public class LineasPedido {
     private float precioVenta;
     
     @ManyToOne
-    @JoinColumn(name = "ref_articulo")
+    @JoinColumn(name = "articulo_id")
     private Articulo articulo; 
     
-    
-	public Articulo getArticulo() {
-		return articulo;
-	}
+	
+	@ManyToOne
+    @JoinColumn(name = "pedido_id")
+	@JsonIgnoreProperties("lineas")
+    private Pedido pedido;
+	
 
-	public void setArticulo(Articulo articulo) {
-		this.articulo = articulo;
-	}
+	
 
 	public LineasPedido() {}
 	
@@ -45,6 +48,23 @@ public class LineasPedido {
         this.cantidad = cantidad;
         this.precioVenta = articulo.getPrecio(); // Capturamos el precio actual
     }
+    
+    public Pedido getPedido() {
+		return pedido;
+	}
+
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
+	}
+    
+    
+    public Articulo getArticulo() {
+		return articulo;
+	}
+
+	public void setArticulo(Articulo articulo) {
+		this.articulo = articulo;
+	}
 
 	
 	public int getId_linea() {

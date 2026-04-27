@@ -2,7 +2,7 @@ const token = localStorage.getItem('token');
 const urlBase = "http://localhost/api/articulos";
 
 if (!token) {
-    location.href = 'index.html';
+    location.href = '/index.html';
 }
 
 // 1. CARGAR ARTÍCULOS

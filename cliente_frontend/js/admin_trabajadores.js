@@ -5,7 +5,7 @@ const urlBase = "/api/trabajadores";
 const rolesUsuario = JSON.parse(localStorage.getItem('roles') || "[]");
 if (!token || !rolesUsuario.includes('DIRECTOR')) {
     console.error("Acceso denegado");
-    location.href = '../index.html';
+    location.href = '/index.html';
 }
 
 // 2. CARGAR USUARIOS EN LA TABLA
