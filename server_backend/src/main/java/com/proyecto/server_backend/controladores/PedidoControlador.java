@@ -28,6 +28,23 @@ public class PedidoControlador {
 	private ServicioPedidos servicioPedidos;
 
 
+	
+	
+
+	
+	@GetMapping
+	public ResponseEntity<?> listarTodos() {
+	    try 
+	    {
+	        List<Pedido> pedidos = servicioPedidos.listarPedidos();
+	        return ResponseEntity.ok(pedidos);
+	    } 
+	    catch (Exception e) 
+	    {
+	        return ResponseEntity.status(500).body("Error al obtener estadísticas: " + e.getMessage());
+	    }
+	}
+	
 
 	@GetMapping("/vendedor/{nombreVendedor}")
 	public ResponseEntity<?> listarPorVendedor(@PathVariable String nombreVendedor) {

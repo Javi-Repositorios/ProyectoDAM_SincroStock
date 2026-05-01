@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.proyecto.server_backend.modelos.Articulo;
 import com.proyecto.server_backend.servicios.ServicioArticulos;
+import com.proyecto.server_backend.servicios.ServicioPedidos;
 
 
 @RestController
@@ -24,7 +25,7 @@ public class ArticuloControlador {
 	
 	@Autowired private ServicioArticulos servicioArticulos;
 
-
+	@Autowired private ServicioPedidos servicioPedidos;
 	
 	//LISTAR
 	@GetMapping
@@ -78,5 +79,10 @@ public class ArticuloControlador {
 	            .map(ResponseEntity::ok)
 	            .orElse(ResponseEntity.notFound().build());
 	}
+	
+	@GetMapping("/mas-vendido")
+    public ResponseEntity<Articulo> getProductoTop() {
+        return ResponseEntity.ok(servicioPedidos.obtenerProductoMasVendido());
+    }
 
 }

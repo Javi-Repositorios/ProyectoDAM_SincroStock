@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.server_backend.modelos.Articulo;
@@ -29,6 +30,13 @@ public class ServicioPedidos {
     @Autowired private ArticuloRepositorio repoArticulo;
     @Autowired private ServicioValidacion servicioValidacion;
 
+    
+    public List<Pedido> listarPedidos()
+    {
+        return pedidoRepo.findAllByOrderByFechaDesc();
+    }
+    
+    
     public List<Pedido> listarPorVendedor(String username) 
     {
         return pedidoRepo.findByVendedorUsernameOrderByFechaDesc(username);
@@ -113,5 +121,19 @@ public class ServicioPedidos {
         //devolver
         return listaResultado;
     
+    }
+    
+    public List<Pedido> obtenerHistorialGlobal() {
+        return pedidoRepo.obtenerTodosLosPedidos();
+    }
+
+    public Articulo obtenerProductoMasVendido() {
+        List<Articulo> resultados = repoArticulo.buscarProductoMasVendido(PageRequest.of(0, 1));
+        return resultados.isEmpty() ? null : resultados.get(0);
+    }
+
+    public Trabajador obtenerVendedorMasExitoso() {
+        List<Trabajador> resultados = repoTrabajador.buscarVendedorConMasVentas(PageRequest.of(0, 1));
+        return resultados.isEmpty() ? null : resultados.get(0);
     }
 }
