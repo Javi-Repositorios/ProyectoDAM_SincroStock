@@ -1,0 +1,42 @@
+$kind: http-request
+name: C3:Sin lineas
+url: localhost/api/pedidos/guardar
+method: POST
+headers:
+  Content-Type: Application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"cliente\": {\r
+
+    \        \"nif\": \"11111111X\"\r
+
+    \    },\r
+
+    \    \"vendedor\": {\r
+
+    \        \"username\": \"javierms\"\r
+
+    \    },\r
+
+    \    \"lineas\": [],\r
+
+    \    \"total\": 100.0,\r
+
+    \    \"fecha\": \"2026-05-02T10:00:00\"\r
+
+    }"
+auth:
+  credentials:
+    token: "'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZpZXJtcyIsInJvbGVzIjoiVkVOREVET1IsRElSRUNUT1IiLCJpYXQiOjE3Nzc3MDkyNTQsImV4cCI6MTc3Nzc5NTY1NH0.dIswtmlpXJ-isSInULYzfctKDDg1-e20-pHkGSwkA2Q3trDGet3aZfowW5A2m5ej'"
+  type: bearer
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Estado de respuesta es 400 Bad Request\", function () {\r
+
+      \    pm.response.to.have.status(400);\r
+
+      });"
+    language: text/javascript
+order: 3971871708020971

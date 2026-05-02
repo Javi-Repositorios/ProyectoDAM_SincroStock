@@ -19,53 +19,47 @@
 
 	
 ///CARGAR PEDIDOS DEL VENDEDOR: 	
-    async function cargarPedidos() {
-        // Si por algún motivo el nombre es nulo, no seguimos
-        if (!vendedor) return;
+async function cargarPedidos() {
+    if (!vendedor) return;
 
-        let url = `${urlBase}/pedidos/vendedor/${vendedor}`; 
-       
-	
-		//PETICION
-        try
-		{
-            const res = await fetch(url, {
-                headers: { 'Authorization': `Bearer ${token}` }
-            });
+    let url = `${urlBase}/pedidos/vendedor/${vendedor}`; 
+    
+    try {
+        const res = await fetch(url, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
 
-			//REPUESTA
-            if (res.ok) 
-				{
-                const pedidos = await res.json();
-                const tabla = document.getElementById('tabla-pedidos');
-                
-                	if (pedidos.length === 0) 
-					{
-                    tabla.innerHTML = '<tr><td colspan="5">No se encontraron pedidos para ' + vendedor + '</td></tr>';
-                    return;
-                	}
+        if (res.ok) {
+            const pedidos = await res.json();
+            const tabla = document.getElementById('tabla-pedidos');
+            
+            if (pedidos.length === 0) {
+                tabla.innerHTML = '<tr><td colspan="5">No se encontraron pedidos para ' + vendedor + '</td></tr>';
+                return;
+            }
 
-	                tabla.innerHTML = pedidos.map(p => `
-				    <tr class="pedido-row" onclick="toggleAcordeon(${p.id})">
-				        <td>#${p.id}</td>
-				        <td>${new Date(p.fecha).toLocaleDateString()}</td>
-				        <td>${p.cliente ? p.cliente.nombre : 'Sin cliente'}</td>
-				        <td>${(p.total || 0).toFixed(2)}€</td>
-				        <td><span style="color: ${p.estado === 'COMPLETADO' ? 'green' : 'orange'}">${p.estado || 'PENDIENTE'}</span></td>
-				    </tr>
-				    <tr id="detalle-${p.id}" class="detalle-row">
-				        <td colspan="5">
-				            <div id="contenido-${p.id}" class="detalle-container"> </div>
+            // Usamos un string vacío para acumular el HTML
+            let html = '';
+            for (const p of pedidos) {
+                html += `
+                <tr class="pedido-row" onclick="toggleAcordeon(${p.id})">
+                    <td>#${p.id}</td>
+                    <td>${new Date(p.fecha).toLocaleDateString()}</td>
+                    <td>${p.cliente ? p.cliente.nombre : 'Sin cliente'}</td>
+                    <td>${(p.total || 0).toFixed(2)}€</td>				       
+                </tr>
+				<tr id="detalle-${p.id}" class="detalle-row" style="display: none;">
+				        <td colspan="5" style="padding: 0;">
+				            <div id="contenido-${p.id}" class="detalle-container"></div>
 				        </td>
-				    </tr>
-					`).join('');
-	            }
-        } 
-		catch (e)
-		{
-            console.error("Error en fetch pedidos:", e);
+				    </tr>`;
+            }
+            tabla.innerHTML = html;
         }
+    } catch (e) {
+        console.error("Error en fetch pedidos:", e);
     }
+}
 	
 ///LOG OUT	
     function cerrarSesion() 

@@ -25,3 +25,21 @@ body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; disp
         .btn-edit { background: #f1c40f; color: #333; margin-right: 5px; }
         .btn-delete { background: #e74c3c; color: white; }
         .btn-logout { background: #c0392b; color: white; width: 100%; margin-top: 20px; }
+        
+        /*renglon de pedidos*/
+        /* Oculta el contenedor por defecto y asegura que no ocupe espacio */
+		.detalle-container {
+		    display: none; /* Esto elimina el espacio físico del elemento */
+		    overflow: hidden;
+		}
+		
+		/* Opcional: Clase para mostrarlo cuando lo necesites vía JS */
+		.detalle-container.activo {
+		    display: block;
+		}
+		
+		/* Asegura que la celda que contiene el div no cree espacio extra si el div está oculto */
+		.celda-contenedor {
+		    padding: 0 !important;
+		    border: none !important;
+		}

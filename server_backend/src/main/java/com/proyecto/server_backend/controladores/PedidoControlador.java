@@ -31,7 +31,7 @@ public class PedidoControlador {
 	
 	
 
-	
+	///LISTAR PEDIDOS
 	@GetMapping
 	public ResponseEntity<?> listarTodos() {
 	    try 
@@ -45,7 +45,7 @@ public class PedidoControlador {
 	    }
 	}
 	
-
+	//FILTRAR PEDIDOS POR VENDEDOR
 	@GetMapping("/vendedor/{nombreVendedor}")
 	public ResponseEntity<?> listarPorVendedor(@PathVariable String nombreVendedor) {
 		
@@ -66,7 +66,7 @@ public class PedidoControlador {
 	}
 
 
-
+	///GUARDAR PEDIDO
 	@PostMapping(value = "/guardar", consumes = "application/json")
 	public ResponseEntity<?> guardarPedido(@RequestBody Pedido pedido) {
 
@@ -97,7 +97,7 @@ public class PedidoControlador {
 	}
 
 
-
+	///OBTENER LINEAS DE PEDIDO
 	@GetMapping("/{id}/lineas")
 	public ResponseEntity<?> obtenerLineasPedido(@PathVariable Long id) {
 
