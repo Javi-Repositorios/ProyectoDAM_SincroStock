@@ -1,36 +1,50 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Panel de Ventas</title>
-    
-    <link rel="stylesheet" href="/css/admin_articulos.css">
+    <meta charset="UTF-8">
+    <title>Panel de Ventas - Mis Pedidos</title>
+     <link rel="stylesheet" href="/css/mix.css">
+
 </head>
 <body>
 
 <nav>
-    <h2>Vendedor - Sincrostock</h2>
-    <hr>
-    <ul style="list-style: none; padding: 0;">
-        <li onclick="location.href='Ventas.html'" style="cursor:pointer; padding: 10px;"> Inicio</li>
-      
-    </ul>
-    <button class="btn btn-logout" onclick="logout()">Cerrar Sesión</button>
+    <h2>Sincrostock</h2>   
+    <button class="btn-logout" onclick="cerrarSesion()">Cerrar Sesión</button>
 </nav>
-
-
 
 <main>
     <div class="card">
-        <h1>Veras tus pedidos y podras hacer nuevos aqui</h1>
-
-        <form id="form-nuevopedido" class="form-group">
+        <div class="header-flex">
+        
+            <h1>Bienvenido <strong id="nombre-vendedor"></strong></h1>
            
-        </form>
+        </div>
+
+        <div class="botonera">
+                      
+            
+            <button class="btn-primary" id= "btnNuevoPedido" onclick="location.href='generar_pedido.html'">+ Nuevo Pedido</button>
+           
+        </div>
 
         <table>
-            
+            <thead>
+                <tr>
+                    <th>ID Pedido</th>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Total</th>
+                  
+                </tr>
+            </thead>
+            <tbody id="tabla-pedidos">
+                <tr><td colspan="5">Cargando pedidos...</td></tr>
+            </tbody>
         </table>
     </div>
 </main>
+
+<script src="/js/ventas.js"></script> 
 </body>
 </html>

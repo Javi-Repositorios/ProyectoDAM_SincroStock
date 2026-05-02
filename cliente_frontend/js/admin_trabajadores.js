@@ -5,7 +5,7 @@ const urlBase = "/api/trabajadores";
 const rolesUsuario = JSON.parse(localStorage.getItem('roles') || "[]");
 if (!token || !rolesUsuario.includes('DIRECTOR')) {
     console.error("Acceso denegado");
-    location.href = '../index.html';
+    location.href = '/index.html';
 }
 
 // 2. CARGAR USUARIOS EN LA TABLA
@@ -38,8 +38,8 @@ async function cargarUsuarios() {
                 <td>********</td>
                 <td><strong>${nombresRoles}</strong></td>
                 <td>
-                    <button class="btn-edit" onclick="prepararEdicion('${u.username}', '${u.nombre || ''}', '${u.apellidos || ''}', '${nombresRoles}')">✏️ Editar</button>
-                    <button class="btn-delete" onclick="borrarUsuario('${u.username}')">🗑️ Borrar</button>
+                    <button class="btn-edit" onclick="prepararEdicion('${u.username}', '${u.nombre || ''}', '${u.apellidos || ''}', '${nombresRoles}')">Editar</button>
+                    <button class="btn-delete" onclick="borrarUsuario('${u.username}')">Borrar</button>
                 </td>
             </tr>`;
         }).join('');
@@ -88,7 +88,7 @@ if (formulario) {
             roles: listaRoles
         };
 
-        // --- LOS LOGS QUE HAS PEDIDO ---
+        // --- LOGS  ---
         console.log("--- DATOS A ENVIAR ---");
         console.log("Objeto JS:", usuarioData);
         console.log("JSON String:", JSON.stringify(usuarioData));
@@ -130,14 +130,18 @@ if (formulario) {
 
 // 5. BORRAR
 async function borrarUsuario(username) {
+	
     if (!confirm(`¿Seguro que quieres eliminar a ${username}?`)) return;
-    try {
+    
+	try 
+	{
         const res = await fetch(`${urlBase}/${username}`, {
             method: 'DELETE',
             headers: { 'Authorization': 'Bearer ' + token }
         });
         if (res.ok) cargarUsuarios();
-    } catch (e) { console.error(e); }
+    }
+	 catch (e) { console.error(e); }
 }
 
 // 6. PREPARAR EDICIÓN

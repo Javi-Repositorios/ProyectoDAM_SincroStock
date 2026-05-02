@@ -1,0 +1,17 @@
+
+// TAREA CRUD PEDIDOS
+Se añade la capacidad de crear pedidos por parte de los vendedores.
+
+Se añade funcionalidad maestro detalle a la tabla de pedidos. 
+
+
+
+
+
+// TAREA ESTADISTICAS DEL DIRECTOR
+
+Se añade metodo al controlador para mostrar todos los pedidos.
+
+Se añaden métodos de busqueda: mejor vendedor y articulo mas vendido para mostrar en dirección.
+
+Se añade capacidad de filtrado por cliente, vendedor o fecha a la tabla de pedidos en dirección.

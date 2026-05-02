@@ -1,0 +1,58 @@
+$kind: http-request
+name: C6:Éxito
+url: localhost/api/pedidos/guardar
+method: POST
+headers:
+  Content-Type: Application/json
+body:
+  type: json
+  content: "{\r
+
+    \    \"cliente\": {\r
+
+    \        \"nif\": \"11111111X\"\r
+
+    \    },\r
+
+    \    \"vendedor\": {\r
+
+    \        \"username\": \"javierms\"\r
+
+    \    },\r
+
+    \    \"lineas\": [\r
+
+    \        {\r
+
+    \            \"cantidad\": 1,\r
+
+    \            \"precioVenta\": 120.0,\r
+
+    \            \"articulo\": {\r
+
+    \                \"id_articulo\": 15\r
+
+    \            }\r
+
+    \        }\r
+
+    \    ],\r
+
+    \    \"total\": 100.0,\r
+
+    \    \"fecha\": \"2026-05-02T11:00:00\"\r
+
+    }"
+auth:
+  credentials:
+    token: "'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZpZXJtcyIsInJvbGVzIjoiVkVOREVET1IsRElSRUNUT1IiLCJpYXQiOjE3Nzc3MDkyNTQsImV4cCI6MTc3Nzc5NTY1NH0.dIswtmlpXJ-isSInULYzfctKDDg1-e20-pHkGSwkA2Q3trDGet3aZfowW5A2m5ej'"
+  type: bearer
+scripts:
+  - type: afterResponse
+    code: "pm.test(\"Status code is 200\", function () {\r
+
+      \    pm.response.to.have.status(200);\r
+
+      });"
+    language: text/javascript
+order: 4291175254172134

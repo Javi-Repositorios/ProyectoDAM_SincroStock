@@ -1,36 +1,121 @@
 package com.proyecto.server_backend.servicios;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.server_backend.modelos.Articulo;
 import com.proyecto.server_backend.modelos.Cliente;
+import com.proyecto.server_backend.modelos.LineasPedido;
+import com.proyecto.server_backend.modelos.Pedido;
+import com.proyecto.server_backend.repositorios.ArticuloRepositorio;
+import com.proyecto.server_backend.repositorios.ClienteRepositorio;
+import com.proyecto.server_backend.repositorios.TrabajadorRepositorio;
 
 @Service
 public class ServicioValidacion {
-	
+
+	@Autowired
+	TrabajadorRepositorio repoTrabajador;
+	@Autowired
+	ClienteRepositorio repoCliente;
+	@Autowired
+	ArticuloRepositorio repoArticulo;
+
 	public boolean esArticuloValido(Articulo articulo)
 	{
 		boolean esValido = false;
-		
+
 		if (articulo.getPrecio() > 0 && articulo.getStock_disponible() > 0) {
-			
+
 			esValido = true;
-        }
-		
+		}
+
 		return esValido;
 	}
-	
-	
-	public boolean esClienteValido(Cliente c) {
-        if (c == null) return false;
-        
-        // Expresión regular para 8 números y 1 letra mayúscula
-        boolean nifValido = c.getNif() != null && c.getNif().matches("^[0-9]{8}[A-Z]$");
-        boolean nombreValido = c.getNombre() != null && !c.getNombre().trim().isEmpty() && c.getNombre().length() <= 100;
-        boolean emailValido = c.getEmail() != null && c.getEmail().contains("@") && c.getEmail().length() <= 100;
-        boolean telValido = c.getTelefono() != null && !c.getTelefono().trim().isEmpty() && c.getTelefono().length() <= 15;
 
-        return nifValido && nombreValido && emailValido && telValido;
-    }
 
+	public boolean esClienteValido(Cliente cliente) 
+	{
+
+		if (cliente == null) return false;
+
+
+		boolean nifValido = cliente.getNif() != null && cliente.getNif().matches("^[0-9]{8}[A-Z]$");
+		boolean nombreValido = cliente.getNombre() != null && !cliente.getNombre().trim().isEmpty() && cliente.getNombre().length() <= 100;
+		boolean emailValido = cliente.getEmail() != null && cliente.getEmail().contains("@") && cliente.getEmail().length() <= 100;
+		boolean telValido = cliente.getTelefono() != null && !cliente.getTelefono().trim().isEmpty() && cliente.getTelefono().length() <= 15;
+
+		return nifValido && nombreValido && emailValido && telValido;
+	}
+
+	public boolean esPedidoValido(Pedido pedido) {
+
+
+		boolean vendedorOk = false;
+		boolean clienteOk = false;
+		boolean tieneLineas = false;
+		boolean stockOk = true;
+		boolean totalResultado = false;
+
+		try 
+		{
+			// 1. Validar Vendedor
+			if (pedido.getVendedor() != null && repoTrabajador.findByUsername(pedido.getVendedor().getUsername()).isPresent()) 
+			{
+				vendedorOk = true;
+			} 
+			else 
+			{
+				System.out.println("DEBUG: Falla Vendedor");
+			}
+
+			// 2. Validar Cliente
+			if (pedido.getCliente() != null && repoCliente.existsById(pedido.getCliente().getNif())) 
+			{
+				clienteOk = true;
+			} 
+			else
+			{
+				System.out.println("DEBUG: Falla Cliente");
+			}
+
+			// 3. Validar Líneas
+			if (pedido.getLineas() != null && !pedido.getLineas().isEmpty()) 
+			{
+				tieneLineas = true;
+			}
+			else 
+			{
+				System.out.println("DEBUG: El pedido no tiene líneas");
+			}
+
+			// 4. Validar Stock
+			if (tieneLineas) 
+			{
+				for (LineasPedido linea : pedido.getLineas())
+				{	
+					Articulo art = repoArticulo.findById(linea.getArticulo().getId_articulo()).orElse(null);
+
+					//si el articulo es nulo o no hay cantidad
+					if (art == null || art.getStock_disponible() < linea.getCantidad())
+					{
+						System.out.println("DEBUG: Fallo en artículo o stock insuficiente");
+						stockOk = false;
+						break;
+					}
+				}
+			}
+
+			// Resultado final (Lógica AND)
+			totalResultado = (vendedorOk && clienteOk && tieneLineas && stockOk);
+
+		} 
+		catch (Exception e)
+		{
+			e.getMessage();
+			e.printStackTrace(); 
+		}
+
+		return totalResultado; 
+	}
 }
