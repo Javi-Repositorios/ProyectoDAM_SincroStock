@@ -17,6 +17,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
+/**
+ * Modelo de la entidad Pedido. PK id
+ */
 @Entity
 @Table(name = "pedidos")
 public class Pedido {

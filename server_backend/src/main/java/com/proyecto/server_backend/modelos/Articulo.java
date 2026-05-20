@@ -15,6 +15,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
+
+/**
+ * Modelo de la entidad Articulo.
+ */
 @Entity
 @Table(name="articulos")
 public class Articulo {

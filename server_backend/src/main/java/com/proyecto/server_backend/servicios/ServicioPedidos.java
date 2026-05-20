@@ -21,6 +21,9 @@ import com.proyecto.server_backend.repositorios.TrabajadorRepositorio;
 
 import jakarta.transaction.Transactional;
 
+/**
+ * El servicio de Pedidos. Utiliza el servcio de validacion y necesita todos los otros repositorios, cliente, trabajador, articulo
+ */
 @Service
 public class ServicioPedidos {
 
@@ -123,17 +126,25 @@ public class ServicioPedidos {
     
     }
     
-    public List<Pedido> obtenerHistorialGlobal() {
+    //TODOS PEDIDOS
+    public List<Pedido> obtenerHistorialGlobal() 
+    {
         return pedidoRepo.obtenerTodosLosPedidos();
     }
 
-    public Articulo obtenerProductoMasVendido() {
+    
+    
+    public Articulo obtenerProductoMasVendido() 
+    {
         List<Articulo> resultados = repoArticulo.buscarProductoMasVendido(PageRequest.of(0, 1));
+        
         return resultados.isEmpty() ? null : resultados.get(0);
     }
 
-    public Trabajador obtenerVendedorMasExitoso() {
+    public Trabajador obtenerVendedorMasExitoso() 
+    {
         List<Trabajador> resultados = repoTrabajador.buscarVendedorConMasVentas(PageRequest.of(0, 1));
+        
         return resultados.isEmpty() ? null : resultados.get(0);
     }
 }
