@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.proyecto.server_backend.modelos.Trabajador;
 
 
-/**
- * Repositorio de la entidad Trabajador
+/**@author Javier Martinez Sodric
+ * Repositorio del modelo Trabajador
  * Contiene la query personalizada para obtener mejor vendedor
  */
 @Repository

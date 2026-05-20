@@ -11,7 +11,7 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
-/**
+/**@author Javier Martinez Sodric
  * El modelo de la entidad Trabajador.PK username. Relacionado con la entidad roles N a M, crea tabla intermedia dinamica roles_de_trabajadores.
  */
 @Entity

@@ -19,8 +19,8 @@ import com.proyecto.server_backend.servicios.ServicioClientes;
 
 
 
-/**
- * Controlador de la entidad Cliente.Contiene las operaciones CRUD.
+/**@author Javier Martinez Sodric
+ * Controlador de la entidad Cliente. Contiene las operaciones CRUD.
  */
 @RestController
 @RequestMapping("/api/clientes")

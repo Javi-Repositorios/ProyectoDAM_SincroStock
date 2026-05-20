@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 
 
 
-/**
+/**@author Javier Martinez Sodric
  * Modelo de la entidad Articulo.
  */
 @Entity

@@ -11,6 +11,11 @@ import com.proyecto.server_backend.repositorios.ArticuloRepositorio;
 import com.proyecto.server_backend.repositorios.ClienteRepositorio;
 import com.proyecto.server_backend.repositorios.TrabajadorRepositorio;
 
+
+/**@author Javier Martinez Sodric
+ * Servicio de validacion, lo usan el resto de servicios antes de insertar en la database.
+ * Necesita los repositorios para insertar.
+ */
 @Service
 public class ServicioValidacion {
 

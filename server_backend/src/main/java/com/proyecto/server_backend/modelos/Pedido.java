@@ -18,7 +18,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
-/**
+/**@author Javier Martinez Sodric
  * Modelo de la entidad Pedido. PK id
  */
 @Entity

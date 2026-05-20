@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import com.proyecto.server_backend.modelos.Cliente;
 
-/**
+/**@author Javier Martinez Sodric
  * Esta interfaz hereda de JpaRepository y proporciona los metodos de acceso genericos, findbyid, deletebyid, findAll
  * aplicados a nuestra especificación Cliente, String, que equivale a la entidad y el tipo de su clave primaria nif= string
  */

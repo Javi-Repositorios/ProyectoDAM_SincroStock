@@ -10,7 +10,7 @@ import com.proyecto.server_backend.modelos.Articulo;
 
 import com.proyecto.server_backend.repositorios.ArticuloRepositorio;
 
-/**
+/**@author Javier Martinez Sodric
  * Logica de negocio del modelo Articulo. Puente entre controlador y repositorio.
  */
 @Service

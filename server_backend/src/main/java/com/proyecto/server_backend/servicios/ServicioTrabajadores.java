@@ -13,8 +13,8 @@ import com.proyecto.server_backend.repositorios.RolRepositorio;
 import com.proyecto.server_backend.repositorios.TrabajadorRepositorio;
 
 
-/**
- * Servicio para la gestión administrativa de trabajadores.
+/**@author Javier Martinez Sodric
+ * Servicio para la gestión  de trabajadores.
  */
 
 

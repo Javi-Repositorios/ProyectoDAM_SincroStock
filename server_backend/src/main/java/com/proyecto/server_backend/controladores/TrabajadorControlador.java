@@ -27,7 +27,7 @@ import com.proyecto.server_backend.servicios.ServicioTrabajadores;
  * @author Javier Martinez Sodric
  * Desde este controlador podremos crear, editar y listar borrar trabajadores. 
  * Obtener el mejor trabajador usando el servicio de pedidos.
- * Validacion usando el servicio de login.
+ * Validacion usando el servicio de login
  * Todas los retornos de la api son un ResponseEntity.
  */
 @RestController

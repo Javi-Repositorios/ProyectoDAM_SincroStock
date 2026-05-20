@@ -17,7 +17,10 @@ import com.proyecto.server_backend.modelos.Articulo;
 import com.proyecto.server_backend.servicios.ServicioArticulos;
 import com.proyecto.server_backend.servicios.ServicioPedidos;
 
-
+/**@author Javier Martinez Sodric
+ * Controlador de Articulos. Expone la url en el requestmapping para responder segun metodo, parametro, o ampliacion de url
+ * como en /mas-vendido que repsonde al GET api/articulos/mas-vendido
+ */
 @RestController
 @RequestMapping("/api/articulos")
 @CrossOrigin(origins = "*")

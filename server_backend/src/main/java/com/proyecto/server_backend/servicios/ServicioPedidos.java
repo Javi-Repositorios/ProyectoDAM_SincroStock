@@ -21,7 +21,7 @@ import com.proyecto.server_backend.repositorios.TrabajadorRepositorio;
 
 import jakarta.transaction.Transactional;
 
-/**
+/**@author Javier Martinez Sodric
  * El servicio de Pedidos. Utiliza el servcio de validacion y necesita todos los otros repositorios, cliente, trabajador, articulo
  */
 @Service

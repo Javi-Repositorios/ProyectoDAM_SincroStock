@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.proyecto.server_backend.modelos.Articulo;
 
 
-/**
+/**@author Javier Martinez Sodric
  * Interfaz DTO para acceder a db por el atributo marcado con @Id integer en el modelo y obtener Articulo
  */
 @Repository

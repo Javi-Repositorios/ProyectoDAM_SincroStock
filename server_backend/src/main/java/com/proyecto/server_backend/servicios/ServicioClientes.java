@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.proyecto.server_backend.modelos.Cliente;
 import com.proyecto.server_backend.repositorios.ClienteRepositorio;
 
-/**
+/**@author Javier Martinez Sodric
  * Servicio para acceder al repositorio de Clientes
  */
 @Service

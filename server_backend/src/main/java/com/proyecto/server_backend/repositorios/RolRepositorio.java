@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.proyecto.server_backend.modelos.Rol;
 
+
+/**@author Javier Martinez Sodric
+ * Interfaz DTO para el modelo Rol.
+ */
 @Repository
 public interface RolRepositorio extends JpaRepository<Rol, String> {
 	

@@ -19,7 +19,7 @@ import com.proyecto.server_backend.security.JwtUtils;
 /**
  * @author Javier Martinez Sodric
  * El servicio de login se encarga de autenticar los datos de registro, extrayendo el nombre del trabajador mandando por parametro, y bucandolo en la base de datos,
- * Después utiliza el encoder para cotejar las contraseñas y si son correctas, crea y devuelve un Map del token, username y roles
+ * Después utiliza el encoder para cotejar las contraseñas y si son correctas, crea y devuelve un Map del token, username y roles.
  */
 @Service
 public class ServicioLogin {
