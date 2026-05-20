@@ -8,6 +8,10 @@ import org.springframework.stereotype.Service;
 import com.proyecto.server_backend.modelos.Rol;
 import com.proyecto.server_backend.repositorios.RolRepositorio;
 
+
+/**@author Javier Martinez Sodric
+ * Servicio para acceder al repositorio Rol
+ */
 @Service
 public class ServicioRoles {
 

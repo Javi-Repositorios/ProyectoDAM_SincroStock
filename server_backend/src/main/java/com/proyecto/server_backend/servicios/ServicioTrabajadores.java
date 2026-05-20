@@ -13,8 +13,8 @@ import com.proyecto.server_backend.repositorios.RolRepositorio;
 import com.proyecto.server_backend.repositorios.TrabajadorRepositorio;
 
 
-/**
- * Servicio para la gestión administrativa de trabajadores.
+/**@author Javier Martinez Sodric
+ * Servicio para la gestión  de trabajadores.
  */
 
 
@@ -28,7 +28,8 @@ public class ServicioTrabajadores {
 	    
 	    
 	    //LEER 
-	    public Optional<Trabajador> buscarPorUsername(String username) {
+	    public Optional<Trabajador> buscarPorUsername(String username) 
+	    {
 	        return repositorio.findById(username);
 	    }
 
@@ -91,25 +92,25 @@ public class ServicioTrabajadores {
 	            trabajador.setApellidos(nuevosDatos.getApellidos());
 
 	            // Password
-	            if (nuevosDatos.getPassword() != null && !nuevosDatos.getPassword().isEmpty()) {
+	            if (nuevosDatos.getPassword() != null && !nuevosDatos.getPassword().isEmpty()) 
+	            {
 	                trabajador.setPassword(encoder.encode(nuevosDatos.getPassword()));
 	            }
 
 	            // Roles
-	            if (nuevosDatos.getRoles() != null) {
+	            if (nuevosDatos.getRoles() != null) 
+	            {
 	                trabajador.getRoles().clear();
-	                for (Rol r : nuevosDatos.getRoles()) {
+	                for (Rol r : nuevosDatos.getRoles()) 
+	                {
 	                    Rol rolBD = rolRepositorio.findByRol(r.getRol())
 	                            .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
 	                    trabajador.getRoles().add(rolBD);
 	                }
 	            }
-
 	            // Guardamos y envolvemos el resultado en el Optional
 	            resultado = Optional.of(repositorio.save(trabajador));
-	        }
-
-	        // 3. Un único punto de salida
+	        }	        
 	        return resultado;
 	    }
 	    

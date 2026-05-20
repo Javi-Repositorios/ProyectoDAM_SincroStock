@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.proyecto.server_backend.modelos.Cliente;
 import com.proyecto.server_backend.servicios.ServicioClientes;
 
+
+
+/**@author Javier Martinez Sodric
+ * Controlador de la entidad Cliente. Contiene las operaciones CRUD.
+ */
 @RestController
 @RequestMapping("/api/clientes")
 @CrossOrigin(origins = "*")

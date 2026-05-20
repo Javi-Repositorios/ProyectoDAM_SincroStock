@@ -10,7 +10,7 @@ import com.proyecto.server_backend.modelos.Articulo;
 
 import com.proyecto.server_backend.repositorios.ArticuloRepositorio;
 
-/**
+/**@author Javier Martinez Sodric
  * Logica de negocio del modelo Articulo. Puente entre controlador y repositorio.
  */
 @Service
@@ -52,20 +52,25 @@ public class ServicioArticulos {
     	articuloRepositorio.deleteById(id); 
     }
 
-    //ACTUALIZAR
-    public Optional<Articulo> actualizar(int id, Articulo nuevosDatos) {
-        // 1. Buscamos el artículo existente por ID
-        return articuloRepositorio.findById(id).map(articulo -> {
+  //ACTUALIZAR
+    public Optional<Articulo> actualizar(int id, Articulo nuevosDatos)
+    {
+        Optional<Articulo> articuloExistente = articuloRepositorio.findById(id);	// Optional para desmontar y sacar articulo
+        Optional<Articulo> resultado = Optional.empty(); 							// Optional vacio para montar y devolver
+
+        if (articuloExistente.isPresent()) {
+            Articulo articulo = articuloExistente.get();
             
-            // 2. Actualizamos todos los campos necesarios
+            // Actualizr
             articulo.setNombre(nuevosDatos.getNombre());
             articulo.setPrecio(nuevosDatos.getPrecio());
             articulo.setStock_disponible(nuevosDatos.getStock_disponible());
 
-            // Si en el futuro añades más campos, deben ir aquí
             
-            // 3. Guardamos los cambios
-            return articuloRepositorio.save(articulo);
-        });
+            //  Guardar en el Optional de resultado
+            resultado = Optional.of(articuloRepositorio.save(articulo));
+        }
+
+        return resultado;
     }
 }

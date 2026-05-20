@@ -17,6 +17,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+
+/**@author Javier Martinez Sodric
+ * Modelo de la entidad Pedido. PK id
+ */
 @Entity
 @Table(name = "pedidos")
 public class Pedido {
@@ -37,7 +41,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "ref_usuario")
-    private Trabajador vendedor; // Tu clase de login
+    private Trabajador vendedor; 
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("pedido") // Evita que la línea intente serializar el pedido de vuelta

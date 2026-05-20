@@ -7,6 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
+/**@author Javier Martinez Sodric
+ * Modelo de la entidad roles. PK rol_id
+ */
 @Entity
 @Table(name = "roles")
 public class Rol {

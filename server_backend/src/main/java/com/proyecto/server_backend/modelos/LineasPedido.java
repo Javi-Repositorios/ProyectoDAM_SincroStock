@@ -13,7 +13,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 
-
+/**@author Javier Martinez Sodric
+ * Modelo de la entidad lineas_de_pedido PK id_linea
+ */
 @Entity
 @Table(name="lineas_de_pedido")
 public class LineasPedido {

@@ -8,7 +8,10 @@ import org.springframework.data.jpa.repository.Query;
 import com.proyecto.server_backend.modelos.Pedido;
 
 
-
+/**@author Javier Martinez Sodric
+ * Interfaz DTO del modelo Pedido. 
+ * Contiene metodos personalizados para devolver los pedidos de un cliente, de un vendededor, o de todos
+ */
 public interface PedidoRepositorio  extends JpaRepository<Pedido,Long> {
 	
 		Pedido findByClienteNombre(String username);

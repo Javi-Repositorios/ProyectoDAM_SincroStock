@@ -5,6 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+
+/**@author Javier Martinez Sodric
+ * El modelo de la entidad Cliente. PK:Nif
+ */
 @Entity
 @Table(name="clientes")
 public class Cliente {

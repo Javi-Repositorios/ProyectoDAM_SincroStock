@@ -18,7 +18,11 @@ import com.proyecto.server_backend.modelos.Pedido;
 import com.proyecto.server_backend.servicios.ServicioPedidos;
 
 
-
+/**@author Javier Martinez Sodric
+ * Controlador de pedidos. Operaciones: LISTAR Y CREAR.  FIltrar por vendedor.
+ * Tamben se obtienen las lineas de pedido desde aqui. Ahorrando un controlador...
+ * NO SE PUEDE BORRAR NI MODIFICAR EL PEDIDO
+ */
 @RestController
 @RequestMapping("/api/pedidos")
 @CrossOrigin("*")

@@ -12,13 +12,16 @@ import org.springframework.stereotype.Repository;
 import com.proyecto.server_backend.modelos.Trabajador;
 
 
-
+/**@author Javier Martinez Sodric
+ * Repositorio del modelo Trabajador
+ * Contiene la query personalizada para obtener mejor vendedor
+ */
 @Repository
 public interface TrabajadorRepositorio extends JpaRepository<Trabajador, String> {
 	
     Optional<Trabajador> findByUsername(String username);
         
-    @Query("SELECT p.vendedor FROM Pedido p GROUP BY p.vendedor ORDER BY COUNT(p) DESC")
+    @Query("SELECT p.vendedor FROM Pedido p GROUP BY p.vendedor ORDER BY SUM(p.total) DESC")
     List<Trabajador> buscarVendedorConMasVentas(Pageable pageable);
 }
 
