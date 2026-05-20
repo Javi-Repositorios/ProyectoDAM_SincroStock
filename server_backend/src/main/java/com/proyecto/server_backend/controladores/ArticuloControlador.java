@@ -35,28 +35,29 @@ public class ArticuloControlador {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> crearArticulo(@RequestBody Articulo articulo) {
+	public ResponseEntity<?> crearArticulo(@RequestBody Articulo articulo) 
+	{
 	    ResponseEntity<?> respuesta;
 
-	    try {
-	        // El servicio hace el trabajo y valida (Nodos 2, 5 y 7)
+	    try 
+	    {	        
 	        Articulo guardado = servicioArticulos.guardar(articulo);
 	        respuesta = ResponseEntity.status(201).body(guardado);
 	    } 
-	    catch (IllegalArgumentException e) {
-	        // Capturamos el error de lógica del servicio (Nodo 4)
+	    catch (IllegalArgumentException e) 
+	    {
 	        respuesta = ResponseEntity.status(422).body("Error: Precio o stock negativos.");
 	    } 
-	    catch (DataIntegrityViolationException e) {
-	        // Error de BD, por ejemplo si ya existe (Nodo 6)
+	    catch (DataIntegrityViolationException e)
+	    {
 	        respuesta = ResponseEntity.status(409).body("El artículo ya existe.");
 	    } 
-	    catch (Exception e) {
-	        // Cualquier otro drama (500)
+	    catch (Exception e) 
+	    {
 	        respuesta = ResponseEntity.status(500).body("Error interno.");
 	    }
 
-	    return respuesta; // ÚNICO RETURN. Prometido.
+	    return respuesta; 
 	}
 	
 	//BORRAR POR ID 
@@ -68,11 +69,11 @@ public class ArticuloControlador {
 	}
 	
 	
-	//ACTUALIZAR: APARTE DE PASAR EL ID POR VARIABLE EN LA RUTA FRONTEND;
-	//				TIENE QUE PASAR EL OBJETO A GUARDAR EN EL BODY
+	//ACTUALIZAR: APARTE DE PASAR EL ID POR VARIABLE EN LA RUTA FRONTEND;  TIENE QUE PASAR EL OBJETO A GUARDAR EN EL BODY
 	@PutMapping("/{id}") 
-	public ResponseEntity<?> actualizarArticulo(@PathVariable("id") int id_articulo, @RequestBody Articulo articulo) {
-	    // Es importante asegurar que el ID de la URL se asigne al objeto
+	public ResponseEntity<?> actualizarArticulo(@PathVariable("id") int id_articulo, @RequestBody Articulo articulo) 
+	{
+	    // Asegurar que el ID de la URL se asigne al objeto
 	    articulo.setId_articulo(id_articulo); 
 	    
 	    return servicioArticulos.actualizar(id_articulo, articulo)
@@ -81,7 +82,8 @@ public class ArticuloControlador {
 	}
 	
 	@GetMapping("/mas-vendido")
-    public ResponseEntity<Articulo> getProductoTop() {
+    public ResponseEntity<Articulo> getProductoTop() 
+	{
         return ResponseEntity.ok(servicioPedidos.obtenerProductoMasVendido());
     }
 

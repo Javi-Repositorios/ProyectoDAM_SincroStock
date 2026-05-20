@@ -37,7 +37,7 @@ public class Pedido {
 
     @ManyToOne
     @JoinColumn(name = "ref_usuario")
-    private Trabajador vendedor; // Tu clase de login
+    private Trabajador vendedor; 
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("pedido") // Evita que la línea intente serializar el pedido de vuelta

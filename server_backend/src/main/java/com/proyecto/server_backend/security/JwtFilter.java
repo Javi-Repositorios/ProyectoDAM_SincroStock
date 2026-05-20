@@ -18,6 +18,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * @author Javier Martinez Sodric
+ * Al extender de OncePerRequestFilter se ejecutará en cada nueva petición, y obliga a definir el metodo
+ * donde se gestiona la validez del token, para incluirlo en el SecurityContextHolder.
+ */
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -47,12 +53,12 @@ public class JwtFilter extends OncePerRequestFilter {
                             new UsernamePasswordAuthenticationToken(username, null, authorities);
                         
                         SecurityContextHolder.getContext().setAuthentication(auth);
-                        
-                        // Log para confirmar en Docker que los roles tienen el prefijo
-                        System.out.println("DEBUG FILTRO: Usuario " + username + " con roles: " + authorities);
+
                     }
                 }
-            } catch (Exception e) {
+            } 
+            catch (Exception e) 
+            {
                 System.out.println("DEBUG FILTRO: Error en validación: " + e.getMessage());
                 SecurityContextHolder.clearContext();
             }

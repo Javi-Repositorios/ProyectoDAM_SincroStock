@@ -23,10 +23,15 @@ import com.proyecto.server_backend.servicios.ServicioRoles;
 import com.proyecto.server_backend.servicios.ServicioTrabajadores;
 
 
-
+/**
+ * @author Javier Martinez Sodric
+ * Desde este controlador podremos crear, editar y listar borrar trabajadores. 
+ * Obtener el mejor trabajador usando el servicio de pedidos.
+ * Validacion usando el servicio de login.
+ * Todas los retornos de la api son un ResponseEntity.
+ */
 @RestController
 @RequestMapping("/api/trabajadores")
-// Quitamos el CrossOrigin de aquí porque ya está en SecurityConfig
 public class TrabajadorControlador {
 
     @Autowired private ServicioTrabajadores trabajadorServicio;
@@ -35,9 +40,7 @@ public class TrabajadorControlador {
     @Autowired private ServicioPedidos pedidosServicio;
 
 
-   
-
-  
+     
     //LISTAR TRABAJADORES
     @GetMapping
     public ResponseEntity<?> obtenerTodos() {
@@ -72,14 +75,16 @@ public class TrabajadorControlador {
     
     //LOGIN
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Trabajador datos) {
+    public ResponseEntity<?> login(@RequestBody Trabajador datos)
+    {
         Map<String, String> resultado = loginService.autenticar(datos);
         return resultado != null ? ResponseEntity.ok(resultado) : ResponseEntity.status(401).body("Error");
     }
     
     //BORRAR TRABAJADOR ( POR PK username )
     @DeleteMapping("/{username}")
-    public ResponseEntity<?> borrar(@PathVariable("username") String username) {
+    public ResponseEntity<?> borrar(@PathVariable("username") String username)
+    {
         trabajadorServicio.borrar(username);
         return ResponseEntity.ok().build();
     }
