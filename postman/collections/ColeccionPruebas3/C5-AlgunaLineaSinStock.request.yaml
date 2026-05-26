@@ -59,7 +59,9 @@ body:
     }"
 auth:
   credentials:
-    token: "'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZpZXJtcyIsInJvbGVzIjoiVkVOREVET1IsRElSRUNUT1IiLCJpYXQiOjE3Nzc3MDkyNTQsImV4cCI6MTc3Nzc5NTY1NH0.dIswtmlpXJ-isSInULYzfctKDDg1-e20-pHkGSwkA2Q3trDGet3aZfowW5A2m5ej'"
+    token: "'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZpZXJtcyIsInJvbGVzIjoiVkVOREVET1IsR\
+      ElSRUNUT1IiLCJpYXQiOjE3Nzc3MDkyNTQsImV4cCI6MTc3Nzc5NTY1NH0.dIswtmlpXJ-isS\
+      InULYzfctKDDg1-e20-pHkGSwkA2Q3trDGet3aZfowW5A2m5ej'"
   type: bearer
 scripts:
   - type: afterResponse
@@ -69,4 +71,4 @@ scripts:
 
       });"
     language: text/javascript
-order: 4424566616119886
+order: 7000

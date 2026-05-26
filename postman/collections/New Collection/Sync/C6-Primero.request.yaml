@@ -1,5 +1,5 @@
 $kind: http-request
-name: C2:Sin cliente
+name: C6:Primero
 url: localhost/api/pedidos/guardar
 method: POST
 headers:
@@ -10,7 +10,7 @@ body:
 
     \    \"cliente\": {\r
 
-    \        \"nif\": null\r
+    \        \"nif\": \"11111111X\"\r
 
     \    },\r
 
@@ -26,11 +26,11 @@ body:
 
     \            \"cantidad\": 1,\r
 
-    \            \"precioVenta\": 100.0,\r
+    \            \"precioVenta\": 120.0,\r
 
     \            \"articulo\": {\r
 
-    \                \"id_articulo\": 11\r
+    \                \"id_articulo\": 15\r
 
     \            }\r
 
@@ -40,21 +40,19 @@ body:
 
     \    \"total\": 100.0,\r
 
-    \    \"fecha\": \"2026-05-02T10:00:00\"\r
+    \    \"fecha\": \"2026-05-02T11:00:00\"\r
 
     }"
 auth:
-  credentials:
-    token: "'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZpZXJtcyIsInJvbGVzIjoiVkVOREVET1IsR\
-      ElSRUNUT1IiLCJpYXQiOjE3Nzc3MDkyNTQsImV4cCI6MTc3Nzc5NTY1NH0.dIswtmlpXJ-isS\
-      InULYzfctKDDg1-e20-pHkGSwkA2Q3trDGet3aZfowW5A2m5ej'"
   type: bearer
+  credentials:
+    token: "'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZpZXJtcyIsInJvbGVzIjoiVkVOREVET1IsRElSRUNUT1IiLCJpYXQiOjE3Nzc3MDkyNTQsImV4cCI6MTc3Nzc5NTY1NH0.dIswtmlpXJ-isSInULYzfctKDDg1-e20-pHkGSwkA2Q3trDGet3aZfowW5A2m5ej'"
 scripts:
   - type: afterResponse
-    code: "pm.test(\"Estado de respuesta es 400 Bad Request\", function () {\r
+    code: "pm.test(\"Status code is 200\", function () {\r
 
-      \    pm.response.to.have.status(400);\r
+      \    pm.response.to.have.status(200);\r
 
       });"
     language: text/javascript
-order: 1000
+order: 1066847721684607

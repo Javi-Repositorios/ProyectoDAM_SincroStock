@@ -46,7 +46,9 @@ body:
 auth:
   type: bearer
   credentials:
-    token: "'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZpZXJtcyIsInJvbGVzIjoiVkVOREVET1IsRElSRUNUT1IiLCJpYXQiOjE3Nzc3MDkyNTQsImV4cCI6MTc3Nzc5NTY1NH0.dIswtmlpXJ-isSInULYzfctKDDg1-e20-pHkGSwkA2Q3trDGet3aZfowW5A2m5ej'"
+    token: "'eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZpZXJtcyIsInJvbGVzIjoiVkVOREVET1IsR\
+      ElSRUNUT1IiLCJpYXQiOjE3Nzc3MDkyNTQsImV4cCI6MTc3Nzc5NTY1NH0.dIswtmlpXJ-isS\
+      InULYzfctKDDg1-e20-pHkGSwkA2Q3trDGet3aZfowW5A2m5ej'"
 scripts:
   - type: afterResponse
     code: "pm.test(\"Estado de respuesta es 400 Bad Request\", function () {\r
