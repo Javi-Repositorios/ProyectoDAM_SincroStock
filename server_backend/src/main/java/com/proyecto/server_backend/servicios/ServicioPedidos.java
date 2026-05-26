@@ -19,6 +19,8 @@ import com.proyecto.server_backend.repositorios.ClienteRepositorio;
 import com.proyecto.server_backend.repositorios.PedidoRepositorio;
 import com.proyecto.server_backend.repositorios.TrabajadorRepositorio;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
 /**@author Javier Martinez Sodric
@@ -33,6 +35,8 @@ public class ServicioPedidos {
     @Autowired private ArticuloRepositorio repoArticulo;
     @Autowired private ServicioValidacion servicioValidacion;
 
+    @PersistenceContext
+    private EntityManager entityManager;
     
     public List<Pedido> listarPedidos()
     {
@@ -48,75 +52,80 @@ public class ServicioPedidos {
     @Transactional
     public Pedido guardarPedido(Pedido pedido) 
     {
-        // Validación 
-        if (!servicioValidacion.esPedidoValido(pedido)) 
-        {
+        // 1. Validación 
+        if (!servicioValidacion.esPedidoValido(pedido)) {
             throw new IllegalArgumentException("VALIDACION_FALLIDA");
         }
 
-        // Recuperar entidades 
+        // 2. Recuperar entidades 
         Trabajador v = repoTrabajador.findByUsername(pedido.getVendedor().getUsername()).orElseThrow(() -> new RuntimeException("VENDEDOR_NO_ENCONTRADO"));
-        
         Cliente c = repoCliente.findById(pedido.getCliente().getNif()).orElseThrow(() -> new RuntimeException("CLIENTE_NO_ENCONTRADO"));
 
-        // Copia de lineas
         List<LineasPedido> lineasOriginales = new ArrayList<>(pedido.getLineas());
         
-        //Asignacion
         pedido.setFecha(LocalDateTime.now());
         pedido.setVendedor(v);
         pedido.setCliente(c);
         pedido.setLineas(new ArrayList<>()); 
 
-        // 3. Persistencia inicial (necesaria para que las líneas tengan un ID de pedido al cual referenciar)
+        // 3. Persistencia inicial
         Pedido pPersistido = pedidoRepo.saveAndFlush(pedido);
 
-        // 4. Procesar líneas y actualizar stock
+        // ========================================================================
+        // borrar caché de Hibernate para este hilo
+        // ========================================================================
+        entityManager.flush(); // Asegura que el pedido se escribe en Postgres
+        entityManager.clear(); // Desacopla TODO de la memoria (obliga a ir a la BD)
+        // ========================================================================
+
+        // Volvemos a recuperar el pedido persistido porque el clear() lo desalojó de la memoria
+        pPersistido = pedidoRepo.findById(pPersistido.getId()).get();
+
         double total = 0;
         
         for (LineasPedido linea : lineasOriginales) 
         {
-        	//Obtener el articulo de la linea
-            Articulo art = repoArticulo.findByIdForUpdate(linea.getArticulo().getId_articulo()).orElseThrow(() -> new RuntimeException("ARTICULO_NO_ENCONTRADO"));
+            // 
+            Articulo art = repoArticulo.findByIdForUpdate(linea.getArticulo().getId_articulo())
+                .orElseThrow(() -> new RuntimeException("ARTICULO_NO_ENCONTRADO"));
             
-            //DESCONTAR STOCK DEL ARTICULO
+            System.out.println(">>> [HILO " + Thread.currentThread().getName() + "] Entra al LOCK. Stock leído: " + art.getStock_disponible());
+
+            // Validar stock real de la base de datos
+            if (art.getStock_disponible() < linea.getCantidad()) 
+            {
+                System.err.println(">>> [HILO " + Thread.currentThread().getName() + "] ¡SIN STOCK! Solicitado: " + linea.getCantidad() + ", Disponible: " + art.getStock_disponible());
+                throw new RuntimeException("Stock insuficiente para el artículo ID: " + art.getId_articulo());
+            }
+
+            // Restar stock
             art.setStock_disponible(art.getStock_disponible() - linea.getCantidad());
-            repoArticulo.save(art);
+            repoArticulo.saveAndFlush(art); 
 
-            
-            // Vincular línea con el pedido y el artículo real
-            linea.setPedido(pPersistido);  // como estamos usando Spring Hibernate se vincula la referencia con el objeto 
-            linea.setArticulo(art);				// ** quedan vinculados el numero de pedido y el numero de articulo a traves de los repositorios
+            // Vincular
+            linea.setPedido(pPersistido);  
+            linea.setArticulo(art);				
             										
-            // Calculo incremental del total de lineas del pedido 
             total += (linea.getPrecioVenta() * linea.getCantidad());
-            
-            //ADICION DE LA LINEA AL PEDIDO
             pPersistido.getLineas().add(linea);
-        }
-        
-        // ==========================================
-        // SIMULACIÓN DE DELAY PARA PRUEBAS
-        // ==========================================
-        try 
-        {
-            System.out.println(">>> HILO '" + Thread.currentThread().getName() + "' HA BLOQUEADO EL STOCK. Durmiendo 10 segundos...");     
-            Thread.sleep(10000); // 10000 milisegundos = 10 segundos
-            System.out.println(">>> HILO '" + Thread.currentThread().getName() + "' DESPIERTA. Haciendo commit y liberando bloqueo.");
-        }
-        catch (InterruptedException e) 
-        {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException("Error en el delay de pruebas", e);
-        }
-        // ==========================================
-        
-        
 
-        //GUARDAR TOTAL Y FINALIZAR
+            // Delay con el candado echado
+            try 
+            {
+                System.out.println(">>> [HILO " + Thread.currentThread().getName() + "] Durmiendo 10 seg con el cerrojo puesto...");     
+                Thread.sleep(10000); 
+                System.out.println(">>> [HILO " + Thread.currentThread().getName() + "] Despierta.");
+            }
+            catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+                throw new RuntimeException(e);
+            }
+        }
+        
         pPersistido.setTotal(total);
         return pedidoRepo.save(pPersistido);
     }
+
 
     public List<LineasPedido> obtenerLineasPorId(Long id) {
     
