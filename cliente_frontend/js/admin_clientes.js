@@ -57,8 +57,8 @@ async function cargarClientes()
 								<td>${c.telefono || ''}</td> 
 			               
 			                    <td>
-			                        <button class="btn-edit" onclick="prepararEdicion('${c.nif}', '${c.nombre }', '${c.email }', '${c.telefono}')">Editar</button>
-			                        <button class="btn-delete" onclick="borrarCliente('${c.nif}')">Borrar</button>
+			                        <button class="btn btn-edit" onclick="prepararEdicion('${c.nif}', '${c.nombre }', '${c.email }', '${c.telefono}')">Editar</button>
+			                        <button class="btn btn-delete" onclick="borrarCliente('${c.nif}')">Borrar</button>
 			                    </td>
 			                </tr>`;
 			            }			           

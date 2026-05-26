@@ -32,8 +32,8 @@ async function cargarArticulos() {
                     <td>${art.stock_disponible}</td>
                     <td>${art.precio.toFixed(2)}€</td>
                     <td>
-                        <button class="btn btn-edit" onclick="prepararEdicion(${art.id_articulo}, '${nombreEscapado}', ${art.precio}, ${art.stock_disponible})">✏️</button>
-                        <button class="btn btn-delete" onclick="borrarArticulo(${art.id_articulo})">🗑️</button>
+                        <button class="btn btn-edit" onclick="prepararEdicion(${art.id_articulo}, '${nombreEscapado}', ${art.precio}, ${art.stock_disponible})">Editar</button>
+                        <button class="btn btn-delete" onclick="borrarArticulo(${art.id_articulo})">Borrar</button>
                     </td>
                 </tr>`;
         }

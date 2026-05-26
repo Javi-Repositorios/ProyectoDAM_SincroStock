@@ -200,3 +200,10 @@ function limpiarFiltros() {
     if(inputFecha) inputFecha.value = "";
     cargarTabla(todosLosPedidos);
 }
+
+///LOG OUT	
+    function cerrarSesion() 
+	{
+        localStorage.clear();
+        location.href = '/index.html';
+    }

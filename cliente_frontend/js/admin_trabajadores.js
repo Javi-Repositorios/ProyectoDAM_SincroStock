@@ -38,8 +38,8 @@ async function cargarUsuarios() {
                 <td>********</td>
                 <td><strong>${nombresRoles}</strong></td>
                 <td>
-                    <button class="btn-edit" onclick="prepararEdicion('${u.username}', '${u.nombre || ''}', '${u.apellidos || ''}', '${nombresRoles}')">Editar</button>
-                    <button class="btn-delete" onclick="borrarUsuario('${u.username}')">Borrar</button>
+                    <button class="btn btn-edit" onclick="prepararEdicion('${u.username}', '${u.nombre || ''}', '${u.apellidos || ''}', '${nombresRoles}')">Editar</button>
+                    <button class="btn btn-delete" onclick="borrarUsuario('${u.username}')">Borrar</button>
                 </td>
             </tr>`;
         }).join('');

@@ -229,7 +229,19 @@ async function cargarClientes() {
     }
 }
 
-// Actualiza el DOMContentLoaded para que cargue ambas cosas
+///LOG OUT	
+    function cerrarSesion() 
+	{
+        localStorage.clear();
+        location.href = '/index.html';
+    }
+//VOLVER
+	function volver() 
+	{
+	    location.href = '/html/PanelesTrabajo/Ventas.html';
+	}
+
+// Actualiza el DOMContentLoaded para que cargue Inventario y Select de Cliente
 document.addEventListener('DOMContentLoaded', () => {
     cargarInventario();
     cargarClientes();
