@@ -77,7 +77,7 @@ public class ServicioPedidos {
         for (LineasPedido linea : lineasOriginales) 
         {
         	//Obtener el articulo de la linea
-            Articulo art = repoArticulo.findById(linea.getArticulo().getId_articulo()).orElseThrow(() -> new RuntimeException("ARTICULO_NO_ENCONTRADO"));
+            Articulo art = repoArticulo.findByIdForUpdate(linea.getArticulo().getId_articulo()).orElseThrow(() -> new RuntimeException("ARTICULO_NO_ENCONTRADO"));
             
             //DESCONTAR STOCK DEL ARTICULO
             art.setStock_disponible(art.getStock_disponible() - linea.getCantidad());
@@ -94,6 +94,24 @@ public class ServicioPedidos {
             //ADICION DE LA LINEA AL PEDIDO
             pPersistido.getLineas().add(linea);
         }
+        
+        // ==========================================
+        // SIMULACIÓN DE DELAY PARA PRUEBAS
+        // ==========================================
+        try 
+        {
+            System.out.println(">>> HILO '" + Thread.currentThread().getName() + "' HA BLOQUEADO EL STOCK. Durmiendo 10 segundos...");     
+            Thread.sleep(10000); // 10000 milisegundos = 10 segundos
+            System.out.println(">>> HILO '" + Thread.currentThread().getName() + "' DESPIERTA. Haciendo commit y liberando bloqueo.");
+        }
+        catch (InterruptedException e) 
+        {
+            Thread.currentThread().interrupt();
+            throw new RuntimeException("Error en el delay de pruebas", e);
+        }
+        // ==========================================
+        
+        
 
         //GUARDAR TOTAL Y FINALIZAR
         pPersistido.setTotal(total);
@@ -133,11 +151,9 @@ public class ServicioPedidos {
     }
 
     
-    
     public Articulo obtenerProductoMasVendido() 
     {
-        List<Articulo> resultados = repoArticulo.buscarProductoMasVendido(PageRequest.of(0, 1));
-        
+        List<Articulo> resultados = repoArticulo.buscarProductoMasVendido(PageRequest.of(0, 1));  
         return resultados.isEmpty() ? null : resultados.get(0);
     }
 
