@@ -19,7 +19,6 @@
 	    const selectClientes = document.getElementById('select-clientes');
 	    const clienteId = selectClientes ? selectClientes.value : null;
 	    let usernameVendedor = localStorage.getItem('usuario');
-
 	    // Validacion FrontEnd
 	    if (!usernameVendedor) 
 		{
@@ -28,16 +27,11 @@
 	    if (!clienteId || clienteId === "") 
 		{
 	        return alert("Selecciona un cliente de la lista.");
-	    }
-		
-		
-
-
+	    }		
 	    //GESTION DE LA LINEA DE PEDIDO
 		const inputs = document.querySelectorAll('.input-cantidad');
 		const lineas = [];
 		let totalAcumulado = 0;
-
 	
 		for (let i = 0; i < inputs.length; i++) 
 			{
@@ -47,13 +41,11 @@
 		    if (cant > 0) 
 				{
 		        // Extraemos el ID del atributo id del input
-		        const idArt = input.id.replace('input-prod-', '');
-		        
+		        const idArt = input.id.replace('input-prod-', '');		        
 		        // Buscamos la fila y el precio
 		        const fila = input.closest('tr');
 		        const precioTexto = fila.cells[2].innerText.replace('€', '').trim();
 		        const precio = parseFloat(precioTexto);
-
 		        // Creamos el objeto
 		        const nuevaLinea = {
 		            cantidad: cant,
@@ -62,13 +54,11 @@
 		                id_articulo: parseInt(idArt)
 		            }
 		        };
-
 		        // AÑADIR a la lista y al total
 		        lineas.push(nuevaLinea);
 		        totalAcumulado += (precio * cant);
 		    }
-		}
-	  
+		}	  
 		//CREAR EL OBJETO JAVASCRIPT DEL PEDIDO
 		const pedidoData = {
 		    cliente: { 
@@ -78,9 +68,6 @@
 		    total: totalAcumulado,
 		    lineas: lineas
 		};
-
-
-
 	    //ENVIO AL SERVIDOR
 	    try {
 	        const res = await fetch("http://localhost/api/pedidos/guardar", {

@@ -41,9 +41,7 @@ public class ServicioValidacion {
 
 	public boolean esClienteValido(Cliente cliente) 
 	{
-
 		if (cliente == null) return false;
-
 
 		boolean nifValido = cliente.getNif() != null && cliente.getNif().matches("^[0-9]{8}[A-Z]$");
 		boolean nombreValido = cliente.getNombre() != null && !cliente.getNombre().trim().isEmpty() && cliente.getNombre().length() <= 100;
@@ -52,9 +50,8 @@ public class ServicioValidacion {
 
 		return nifValido && nombreValido && emailValido && telValido;
 	}
-
+	
 	public boolean esPedidoValido(Pedido pedido) {
-
 
 		boolean vendedorOk = false;
 		boolean clienteOk = false;
@@ -63,44 +60,24 @@ public class ServicioValidacion {
 		boolean totalResultado = false;
 
 		try 
-		{
-			// 1. Validar Vendedor
+		{			// 1. Validar Vendedor
 			if (pedido.getVendedor() != null && repoTrabajador.findByUsername(pedido.getVendedor().getUsername()).isPresent()) 
 			{
 				vendedorOk = true;
-			} 
-			else 
-			{
-				System.out.println("DEBUG: Falla Vendedor");
-			}
-
-			// 2. Validar Cliente
+			} 				// 2. Validar Cliente
 			if (pedido.getCliente() != null && repoCliente.existsById(pedido.getCliente().getNif())) 
 			{
 				clienteOk = true;
-			} 
-			else
-			{
-				System.out.println("DEBUG: Falla Cliente");
-			}
-
-			// 3. Validar Líneas
+			} 				// 3. Validar Líneas
 			if (pedido.getLineas() != null && !pedido.getLineas().isEmpty()) 
 			{
 				tieneLineas = true;
-			}
-			else 
-			{
-				System.out.println("DEBUG: El pedido no tiene líneas");
-			}
-
-			// 4. Validar Stock
+			}			// 4. Validar Stock
 			if (tieneLineas) 
 			{
 				for (LineasPedido linea : pedido.getLineas())
 				{	
 					Articulo art = repoArticulo.findById(linea.getArticulo().getId_articulo()).orElse(null);
-
 					//si el articulo es nulo o no hay cantidad
 					if (art == null || art.getStock_disponible() < linea.getCantidad())
 					{
@@ -110,17 +87,14 @@ public class ServicioValidacion {
 					}
 				}
 			}
-
 			// Resultado final (Lógica AND)
 			totalResultado = (vendedorOk && clienteOk && tieneLineas && stockOk);
-
 		} 
 		catch (Exception e)
 		{
 			e.getMessage();
 			e.printStackTrace(); 
 		}
-
 		return totalResultado; 
 	}
 }

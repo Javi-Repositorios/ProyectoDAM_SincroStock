@@ -31,10 +31,6 @@ public class PedidoControlador {
 	@Autowired
 	private ServicioPedidos servicioPedidos;
 
-
-	
-	
-
 	///LISTAR PEDIDOS
 	@GetMapping
 	public ResponseEntity<?> listarTodos() {
@@ -69,7 +65,6 @@ public class PedidoControlador {
 	    return respuesta;
 	}
 
-
 	///GUARDAR PEDIDO
 	@PostMapping(value = "/guardar", consumes = "application/json")
 	public ResponseEntity<?> guardarPedido(@RequestBody Pedido pedido) {
@@ -99,7 +94,6 @@ public class PedidoControlador {
 
 		return respuesta;
 	}
-
 
 	///OBTENER LINEAS DE PEDIDO
 	@GetMapping("/{id}/lineas")
