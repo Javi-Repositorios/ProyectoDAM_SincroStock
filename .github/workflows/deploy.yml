@@ -3,7 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - main # Cambie a 'master' si su rama principal se llama así
+      - main
 
 jobs:
   deploy:
@@ -18,11 +18,8 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
+          password: ${{ secrets.SSH_PASSWORD }} # Se usa 'password' en lugar de 'key'
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd /root/sincrostock
             git pull origin main
-            # Agregue aquí comandos adicionales si su app lo requiere:
-            # npm install
-            # pm2 restart app
