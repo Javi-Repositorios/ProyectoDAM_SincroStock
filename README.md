@@ -58,4 +58,9 @@ Para desplegar la aplicación localmente, asegúrate de tener **Docker Desktop**
     ```
 
 ---
-*Este proyecto ha finalizado la etapa del desarrollo, y se encuentra en fase de documentación y preparación para el despliegue.*
+4.  Tendrás que introducir el usuario principal en Postgres,  tienes el código necesario en la documentación.
+    Lo puedes ver  en el Esquema Entidad Relación y siguientes.
+
+    Una vez levantado el stack, se entra por localhost.
+
+5.  Actualmente las rutas están apuntando al servidor real (midominio.com) . Deberás modificarlas para que funcione en localhost.
